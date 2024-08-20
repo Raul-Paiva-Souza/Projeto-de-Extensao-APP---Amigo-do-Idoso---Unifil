@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="80dp"
+        app:srcCompat="@drawable/amigo_do_idoso_imagem_tela_inicial" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:layout_weight="0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_entrar"
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="Entrar" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_weight="0" />
+
+    <Button
+        android:id="@+id/btn_criar_conta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Não tenho conta. clique aqui para criar"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:iconPadding="20dp"
+        app:rippleColor="@android:color/transparent"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:foregroundTint="#673AB7"
+        android:orientation="vertical"></LinearLayout>
+
+</LinearLayout>
