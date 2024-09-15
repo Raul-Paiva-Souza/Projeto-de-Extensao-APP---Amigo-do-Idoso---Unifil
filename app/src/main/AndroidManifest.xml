@@ -13,11 +13,43 @@
         android:theme="@style/Theme.Amigo_do_Idoso_v31"
         tools:targetApi="31">
         <activity
+            android:name=".Opcoes"
+            android:exported="false" />
+        <activity
+            android:name=".SOS"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Consultasexames"
+            android:exported="false" />
+        <activity
+            android:name=".Medicamentos"
+            android:exported="false" />
+        <activity
+            android:name=".Agenda"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".Anamnese"
+            android:exported="false" />
+        <activity
+            android:name=".Menu"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".Cadastro"
+            android:exported="false" />
+        <activity
+            android:name=".NovoLogin"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    tools:context=".SOS">
+
+    <TextView
+        android:id="@+id/titulo_sos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="29dp"
+        android:text="Emergência"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chamar_polícia"
+        app:layout_constraintStart_toStartOf="@+id/btn_chamar_polícia"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_chamar_polícia"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
+        android:text="Polícia"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chamar_bombeiros"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_sos" />
+
+    <Button
+        android:id="@+id/btn_chamar_bombeiros"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="17dp"
+        android:text="Bombeiros"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chamar_SAMU"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chamar_polícia" />
+
+    <Button
+        android:id="@+id/btn_chamar_SAMU"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:text="SAMU"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chamar_contato_de_confianca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chamar_bombeiros" />
+
+    <Button
+        android:id="@+id/btn_chamar_contato_de_confianca"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="72dp"
+        android:text="Contato de Connfiança"
+        app:layout_constraintBottom_toTopOf="@+id/btn_voltar_sos_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chamar_SAMU" />
+
+    <Button
+        android:id="@+id/btn_voltar_sos_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="33dp"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chamar_contato_de_confianca" />
+</androidx.constraintlayout.widget.ConstraintLayout>

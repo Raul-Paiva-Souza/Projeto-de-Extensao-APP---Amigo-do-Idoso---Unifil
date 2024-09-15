@@ -1,3 +1,222 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Amigo_do_Idoso_v3.1</string>
+    <string-array name="estados_brasil">
+        <item>Acre</item>
+        <item>Alagoas</item>
+        <item>Amapá</item>
+        <item>Amazonas</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Distrito Federal</item>
+        <item>Espírito Santo</item>
+        <item>Goiás</item>
+        <item>Maranhão</item>
+        <item>Mato Grosso</item>
+        <item>Mato Grosso do Sul</item>
+        <item>Minas Gerais</item>
+        <item>Pará</item>
+        <item>Paraíba</item>
+        <item>Paraná</item>
+        <item>Pernambuco</item>
+        <item>Piauí</item>
+        <item>Rio de Janeiro</item>
+        <item>Rio Grande do Norte</item>
+        <item>Rio Grande do Sul</item>
+        <item>Rondônia</item>
+        <item>Roraima</item>
+        <item>Santa Catarina</item>
+        <item>São Paulo</item>
+        <item>Sergipe</item>
+        <item>Tocantins</item>
+    </string-array>
+
+    <string-array name="cidades_acre">
+        <item>Assis Brasil</item>
+        <item>Brasiléia</item>
+        <item>Cruzeiro do Sul</item>
+        <item>Rio Branco</item>
+    </string-array>
+
+    <string-array name="cidades_alagoas">
+        <item>Arapiraca</item>
+        <item>Maceió</item>
+        <item>Palmeira dos Índios</item>
+        <item>São Miguel dos Campos</item>
+    </string-array>
+
+    <string-array name="cidades_amapá">
+        <item>Macapá</item>
+        <item>Santana</item>
+        <item>Oiapoque</item>
+    </string-array>
+
+    <string-array name="cidades_amazonas">
+        <item>Manaus</item>
+        <item>Parintins</item>
+        <item>Itacoatiara</item>
+    </string-array>
+
+    <string-array name="cidades_bahia">
+        <item>Salvador</item>
+        <item>Feira de Santana</item>
+        <item>Vitória da Conquista</item>
+    </string-array>
+
+    <string-array name="cidades_ceará">
+        <item>Fortaleza</item>
+        <item>Juazeiro do Norte</item>
+        <item>Maracanaú</item>
+    </string-array>
+
+    <string-array name="cidades_distrito_federal">
+        <item>Brasília</item>
+    </string-array>
+
+    <string-array name="cidades_espírito_santo">
+        <item>Vitória</item>
+        <item>Serra</item>
+        <item>Vila Velha</item>
+    </string-array>
+
+    <string-array name="cidades_goiás">
+        <item>Goiânia</item>
+        <item>Águas Lindas de Goiás</item>
+        <item>Anápolis</item>
+    </string-array>
+
+    <string-array name="cidades_maranhão">
+        <item>São Luís</item>
+        <item>Imperatriz</item>
+        <item>Codó</item>
+    </string-array>
+
+    <string-array name="cidades_mato_grosso">
+        <item>Cuiabá</item>
+        <item>Várzea Grande</item>
+        <item>Rondonópolis</item>
+    </string-array>
+
+    <string-array name="cidades_mato_grosso_do_sul">
+        <item>Campo Grande</item>
+        <item>Dourados</item>
+        <item>Três Lagoas</item>
+    </string-array>
+
+    <string-array name="cidades_minas_gerais">
+        <item>Belo Horizonte</item>
+        <item>Uberlândia</item>
+        <item>Contagem</item>
+    </string-array>
+
+    <string-array name="cidades_pará">
+        <item>Belém</item>
+        <item>Ananindeua</item>
+        <item>Parauapebas</item>
+    </string-array>
+
+    <string-array name="cidades_paraíba">
+        <item>João Pessoa</item>
+        <item>Campina Grande</item>
+        <item>Santa Rita</item>
+    </string-array>
+
+    <string-array name="cidades_paraná">
+        <item>Curitiba</item>
+        <item>Londrina</item>
+        <item>Foz do Iguaçu</item>
+    </string-array>
+
+    <string-array name="cidades_pernambuco">
+        <item>Recife</item>
+        <item>Olinda</item>
+        <item>Jaboatão dos Guararapes</item>
+    </string-array>
+
+    <string-array name="cidades_piauí">
+        <item>Teresina</item>
+        <item>Parnaíba</item>
+        <item>Picos</item>
+    </string-array>
+
+    <string-array name="cidades_rio_de_janeiro">
+        <item>Rio de Janeiro</item>
+        <item>Niterói</item>
+        <item>Duque de Caxias</item>
+    </string-array>
+
+    <string-array name="cidades_rio_grande_do_norte">
+        <item>Natal</item>
+        <item>Mossoró</item>
+        <item>Parnamirim</item>
+    </string-array>
+
+    <string-array name="cidades_rio_grande_do_sul">
+        <item>Porto Alegre</item>
+        <item>Caxias do Sul</item>
+        <item>Pelotas</item>
+    </string-array>
+
+    <string-array name="cidades_rondônia">
+        <item>Porto Velho</item>
+        <item>Ji-Paraná</item>
+        <item>Vilhena</item>
+    </string-array>
+
+    <string-array name="cidades_roraima">
+        <item>Boa Vista</item>
+        <item>Rorainópolis</item>
+        <item>Caracaraí</item>
+    </string-array>
+
+    <string-array name="cidades_santa_catarina">
+        <item>Florianópolis</item>
+        <item>Joinville</item>
+        <item>Blumenau</item>
+    </string-array>
+
+    <string-array name="cidades_são_paulo">
+        <item>São Paulo</item>
+        <item>Campinas</item>
+        <item>Sorocaba</item>
+    </string-array>
+
+    <string-array name="cidades_sergipe">
+        <item>Aracaju</item>
+        <item>Socorro</item>
+        <item>Itabaiana</item>
+    </string-array>
+
+    <string-array name="cidades_tocantins">
+        <item>Palmas</item>
+        <item>Araguaína</item>
+        <item>Paraíso do Tocantins</item>
+    </string-array>
+
+
+    <string-array name="tipo_relacao">
+        <item>Selecione uma opção</item>
+        <item>Filho</item>
+        <item>Outro parente</item>
+        <item>Cuidador</item>
+        <item>Amigo</item>
+    </string-array>
+
+
+    <string-array name="doencas_cronicas">
+        <item>Hipertensão</item>
+        <item>Diabetes</item>
+        <item>Asma</item>
+        <item>Doença Cardíaca</item>
+        <item>Doença Renal Crônica</item>
+        </string-array>
+
+        <string-array name="medicamentos_continuos">
+            <item>Losartana</item>
+            <item>Metformina</item>
+            <item>AAS</item>
+            <item>Atorvastatina</item>
+            <item>Clopidogrel</item>
+        </string-array>
+
 </resources>
+
