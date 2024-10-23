@@ -12,191 +12,175 @@
       android:id="@+id/titulo_Anamnese"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
-      android:layout_marginEnd="33dp"
+      android:layout_marginStart="114dp"
+      android:layout_marginTop="16dp"
       android:text="Anamnese"
       android:textSize="34sp"
-      app:layout_constraintEnd_toEndOf="@+id/txt_pergunta_doenca_cronica"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-  <TextView
-      android:id="@+id/txt_pergunta_doenca_cronica"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="34dp"
-      android:layout_marginTop="18dp"
-      android:text="Possui alguma doença crônica?"
-      android:textSize="20sp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/titulo_Anamnese" />
-
-  <RadioGroup
-      android:id="@+id/radiogroup_doenca_cronica"
+  <ScrollView
+      android:id="@+id/scrollview_anamnese"
       android:layout_width="0dp"
-      android:layout_height="60dp"
-      android:layout_marginTop="27dp"
-      android:layout_marginBottom="39dp"
-      android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/lista_doencas_cronicas"
-      app:layout_constraintEnd_toEndOf="@+id/radiogroup_remedio_continuo"
-      app:layout_constraintStart_toStartOf="@+id/txt_pergunta_doenca_cronica"
-      app:layout_constraintTop_toTopOf="@+id/txt_pergunta_doenca_cronica">
-
-    <RadioButton
-        android:id="@+id/btn_doenca_cronica_sim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Sim" />
-
-    <RadioButton
-        android:id="@+id/btn_doenca_cronica_nao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Não" />
-  </RadioGroup>
-
-  <Spinner
-      android:id="@+id/lista_doencas_cronicas"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="51dp"
-      android:minHeight="48dp"
-      android:visibility="visible"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_pergunta_doenca_cronica" />
-
-  <TextView
-      android:id="@+id/txt_pergunta_remedio_continuo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="34dp"
-      android:text="Toma remédio de uso contínuo?"
-      android:textSize="20sp"
-      app:layout_constraintStart_toStartOf="@+id/lista_doencas_cronicas"
-      app:layout_constraintTop_toBottomOf="@+id/lista_doencas_cronicas" />
-
-  <RadioGroup
-      android:id="@+id/radiogroup_remedio_continuo"
-      android:layout_width="180dp"
       android:layout_height="0dp"
-      android:orientation="horizontal"
-      app:layout_constraintBottom_toTopOf="@+id/lista_remedio_continuo"
-      app:layout_constraintStart_toStartOf="@+id/txt_pergunta_remedio_continuo"
-      app:layout_constraintTop_toBottomOf="@+id/txt_pergunta_remedio_continuo">
-
-    <RadioButton
-        android:id="@+id/btn_remedio_continuo_sim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Sim"
-        android:textSize="16sp" />
-
-    <RadioButton
-        android:id="@+id/btn_remedio_continuo_nao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Não" />
-
-  </RadioGroup>
-
-  <Spinner
-      android:id="@+id/lista_remedio_continuo"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:minHeight="48dp"
-      android:visibility="visible"
+      android:layout_marginTop="78dp"
+      android:layout_marginBottom="78dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent">
 
-  <com.google.android.material.chip.ChipGroup
-      android:id="@+id/chipgroup_dificuldades"
-      android:layout_width="0dp"
-      android:layout_height="104dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="60dp"
-      android:layout_marginEnd="16dp"
-      android:layout_marginBottom="57dp"
-      app:layout_constraintBottom_toBottomOf="@+id/txtbox_peso"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/lista_remedio_continuo">
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_dificuldade_fala"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear_vert_anamnese_principal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fala"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:orientation="vertical">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_dificuldade_audicao"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Audição"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+      <TextView
+          android:id="@+id/txt_pergunta_doenca_cronica"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Possui alguma doença crônica?"
+          android:textSize="20sp" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_dificuldade_visao"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Visão"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+      <RadioGroup
+          android:id="@+id/radiogroup_doenca_cronica"
+          android:layout_width="181dp"
+          android:layout_height="57dp"
+          android:orientation="horizontal">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_dificuldade_locomocao"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Locomoção"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-  </com.google.android.material.chip.ChipGroup>
+        <RadioButton
+            android:id="@+id/btn_doenca_cronica_sim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sim" />
 
-  <EditText
-      android:id="@+id/txtbox_peso"
-      android:layout_width="0dp"
-      android:layout_height="40dp"
-      android:layout_marginTop="133dp"
-      android:layout_marginBottom="130dp"
-      android:ems="10"
-      android:hint="Peso:"
-      android:inputType="numberDecimal"
-      android:textSize="20sp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="@+id/txtbox_altura"
-      app:layout_constraintStart_toStartOf="@+id/txtbox_altura"
-      app:layout_constraintTop_toBottomOf="@+id/lista_remedio_continuo" />
+        <RadioButton
+            android:id="@+id/btn_doenca_cronica_nao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Não" />
+      </RadioGroup>
 
-  <EditText
-      android:id="@+id/txtbox_altura"
-      android:layout_width="130dp"
-      android:layout_height="40dp"
-      android:layout_marginStart="34dp"
-      android:layout_marginTop="40dp"
-      android:layout_marginBottom="25dp"
-      android:ems="10"
-      android:hint="Altura:"
-      android:inputType="numberDecimal"
-      android:textSize="20sp"
-      app:layout_constraintBottom_toTopOf="@+id/btn_voltar_anamnese_menu"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/txtbox_peso" />
+      <Spinner
+          android:id="@+id/lista_doencas_cronicas"
+          android:layout_width="411dp"
+          android:layout_height="wrap_content"
+          android:minHeight="48dp"
+          android:visibility="visible" />
+
+      <TextView
+          android:id="@+id/txt_pergunta_remedio_continuo"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Toma remédio de uso contínuo?"
+          android:textSize="20sp" />
+
+      <RadioGroup
+          android:id="@+id/radiogroup_remedio_continuo"
+          android:layout_width="146dp"
+          android:layout_height="57dp"
+          android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/btn_remedio_continuo_sim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sim"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/btn_remedio_continuo_nao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Não" />
+
+      </RadioGroup>
+
+      <Spinner
+          android:id="@+id/lista_remedio_continuo"
+          android:layout_width="411dp"
+          android:layout_height="wrap_content"
+          android:minHeight="48dp"
+          android:visibility="visible" />
+
+      <TextView
+          android:id="@+id/txt_dificuldades"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Possui alguma dificuldade de:"
+          android:textSize="20sp" />
+
+      <com.google.android.material.chip.ChipGroup
+          android:id="@+id/chipgroup_dificuldades"
+          android:layout_width="344dp"
+          android:layout_height="101dp"
+          android:visibility="visible">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_dificuldade_fala"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fala"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_dificuldade_audicao"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Audição"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_dificuldade_visao"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visão"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_dificuldade_locomocao"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Locomoção"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+      </com.google.android.material.chip.ChipGroup>
+
+      <EditText
+          android:id="@+id/txtbox_peso"
+          android:layout_width="130dp"
+          android:layout_height="48dp"
+          android:ems="10"
+          android:hint="Peso:"
+          android:inputType="numberDecimal"
+          android:textSize="20sp" />
+
+      <EditText
+          android:id="@+id/txtbox_altura"
+          android:layout_width="130dp"
+          android:layout_height="48dp"
+          android:ems="10"
+          android:hint="Altura:"
+          android:inputType="numberDecimal"
+          android:textSize="20sp" />
+    </LinearLayout>
+  </ScrollView>
 
   <Button
       android:id="@+id/btn_salvar_anamnese"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
-      android:layout_marginBottom="17dp"
+      android:layout_marginBottom="18dp"
       android:text="Salvar"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
@@ -214,7 +198,7 @@
       android:id="@+id/btn_voltar_anamnese_novocadastro"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="17dp"
+      android:layout_marginBottom="18dp"
       android:text="Voltar"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="@+id/btn_voltar_anamnese_menu" />

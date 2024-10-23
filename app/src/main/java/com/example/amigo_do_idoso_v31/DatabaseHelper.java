@@ -323,5 +323,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return numero;
     }
 
+    // Método para buscar o nome do usuário a partir do telefone
+    public String getNomeUsuario(String telefone) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String nomeUsuario = null;
+
+        // Query para buscar o nome baseado no telefone
+        Cursor cursor = db.rawQuery(
+                "SELECT " + COLUMN_CADASTRO_NOME + " FROM " + TABLE_CADASTRO + " c " +
+                        " JOIN " + TABLE_LOGIN + " l ON l." + COLUMN_LOGIN_TELEFONE + " = c." + COLUMN_CADASTRO_ID + // Ajuste o JOIN conforme necessário
+                        " WHERE l." + COLUMN_LOGIN_TELEFONE + " = ?", new String[]{telefone}
+        );
+
+        // Verifique se encontrou algum resultado
+        if (cursor.moveToFirst()) {
+            nomeUsuario = cursor.getString(cursor.getColumnIndex(COLUMN_CADASTRO_NOME));
+        }
+
+        cursor.close();
+        return nomeUsuario; // Retorna o nome do usuário ou null se não encontrado
+    }
+
+
 }
 

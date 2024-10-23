@@ -1,7 +1,9 @@
 package com.example.amigo_do_idoso_v31;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,54 +15,38 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 import android.widget.AdapterView;
 
 public class Cadastro extends AppCompatActivity {
 
-    private Spinner estadoSpinner;
-    private Spinner cidadeSpinner;
+    private Spinner estadoSpinner, cidadeSpinner, listaTipoRelacao;
     private DatabaseHelper dbHelper;
 
-    private Button btnAvancar, btnSalvar, btnVoltarOpcoes, btnVoltarNovoLogin;
-    private ViewSwitcher viewSwitcher;
-
-    // Inicializando os campos relacionados ao RadioGroup e EditText
+    private Button btnSalvar, btnVoltarMenu;
     private RadioGroup radioGroupMoraComAlguem;
-    private EditText txtNomeDoAlguem;
-    private EditText txtContatoDoAlguem;
-    private Spinner listaTipoRelacao;
+    private EditText txtNomeDoAlguem, txtContatoDoAlguem, txtNome, txtIdade, txtRua, txtNumero, txtBairro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        // Inicializando os componentes da interface
         dbHelper = new DatabaseHelper(this);
 
+        // Inicializando os componentes da interface
         estadoSpinner = findViewById(R.id.escolhestado);
         cidadeSpinner = findViewById(R.id.escolhecidade);
-        btnAvancar = findViewById(R.id.btn_avancar_CadastroparaAnamnese);
         btnSalvar = findViewById(R.id.btn_salvar_cadastro);
-        btnVoltarOpcoes = findViewById(R.id.btn_voltar_cadastro_opcoes);
-        btnVoltarNovoLogin = findViewById(R.id.btn_voltar_cadastro_novologin);
-        viewSwitcher = findViewById(R.id.view_switcher_cadastro);
-
-        // Inicializando os campos relacionados ao RadioGroup e EditText
+        btnVoltarMenu = findViewById(R.id.btn_voltar_cadastro);
         radioGroupMoraComAlguem = findViewById(R.id.radiogroup_moracoalguem);
         txtNomeDoAlguem = findViewById(R.id.txtbox_nomedoalguem);
         txtContatoDoAlguem = findViewById(R.id.txtbox_contatodoalguem);
         listaTipoRelacao = findViewById(R.id.lista_tipo_relacao);
-
-        // Verificando o modo (novo cadastro ou edição) com base na Intent
-        String modo = getIntent().getStringExtra("modo");
-
-        if (modo != null && modo.equals("editarCadastro")) {
-            viewSwitcher.setDisplayedChild(1);  // Mostra os botões de edição
-        } else {
-            viewSwitcher.setDisplayedChild(0);  // Mostra os botões de novo cadastro
-        }
+        txtNome = findViewById(R.id.txtbox_nome);
+        txtIdade = findViewById(R.id.txt_box_idade);
+        txtRua = findViewById(R.id.txtbox_rua);
+        txtNumero = findViewById(R.id.txtbox_end_num);
+        txtBairro = findViewById(R.id.txtbox_bairro);
 
         // Configurações dos spinners
         ArrayAdapter<CharSequence> estadoAdapter = ArrayAdapter.createFromResource(this,
@@ -76,9 +62,11 @@ public class Cadastro extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
+        // Configuração do RadioGroup para verificar se mora com alguém
         radioGroupMoraComAlguem.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.check_moracoalguem_sim) {
                 txtNomeDoAlguem.setVisibility(View.VISIBLE);
@@ -95,53 +83,76 @@ public class Cadastro extends AppCompatActivity {
                 R.array.tipo_relacao, android.R.layout.simple_spinner_item);
         tipoRelacaoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listaTipoRelacao.setAdapter(tipoRelacaoAdapter);
-        listaTipoRelacao.setSelection(0);
 
-        // Botão para salvar cadastro
+        // Botão para salvar o cadastro
         btnSalvar.setOnClickListener(v -> salvarCadastro());
 
-        // Botão para avançar para a Anamnese
-        btnAvancar.setOnClickListener(v -> {
-            salvarCadastro();  // Salva as informações antes de avançar
-            Intent intent = new Intent(Cadastro.this, Anamnese.class);
-            startActivity(intent);
-        });
-
-        // Botão para voltar para as Opções
-        btnVoltarOpcoes.setOnClickListener(v -> {
-            Intent intent = new Intent(Cadastro.this, Menu.class);
-            startActivity(intent);
-        });
-
-        // Botão para voltar para o Novo Login
-        btnVoltarNovoLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(Cadastro.this, NovoLogin.class);
-            startActivity(intent);
-        });
+        // Botão para voltar ao menu ou login
+        btnVoltarMenu.setOnClickListener(v -> voltarMenuOuLogin());
     }
 
     private void salvarCadastro() {
-        // Obter os dados do formulário
-        String nome = "";
-        int idade = Integer.parseInt("");
-        long enderecoId = Long.parseLong("");
+        String nome = txtNome.getText().toString().trim();
+        String idadeStr = txtIdade.getText().toString().trim();
+        String rua = txtRua.getText().toString().trim();
+        String numeroStr = txtNumero.getText().toString().trim();
+        String bairro = txtBairro.getText().toString().trim();
 
-        // Verificar se o usuário informou que mora com alguém e se os campos estão preenchidos
+        if (nome.isEmpty() || idadeStr.isEmpty() || rua.isEmpty() || numeroStr.isEmpty() || bairro.isEmpty()) {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int idade = Integer.parseInt(idadeStr);
+        long enderecoId = dbHelper.inserirEndereco(rua, Integer.parseInt(numeroStr), bairro, estadoSpinner.getSelectedItem().toString());
+
+        // Verificar se o usuário informou que mora com alguém
         if (radioGroupMoraComAlguem.getCheckedRadioButtonId() == R.id.check_moracoalguem_sim) {
             String nomeDoAlguem = txtNomeDoAlguem.getText().toString().trim();
             String contatoDoAlguem = txtContatoDoAlguem.getText().toString().trim();
 
             if (!nomeDoAlguem.isEmpty() && !contatoDoAlguem.isEmpty()) {
-                // Inserir dados na tabela SOS
                 dbHelper.inserirSosContato(nomeDoAlguem, contatoDoAlguem);
             }
         }
 
-        // Salvar ou atualizar cadastro na tabela Cadastro
-        dbHelper.salvarCadastro(nome, idade, enderecoId);
+        // Verificar se já existe cadastro
+        if (dbHelper.existeCadastro()) {
+            // Atualizar o cadastro existente
+            dbHelper.salvarCadastro(nome, idade, enderecoId);
+            mostrarPopupSucesso("Cadastro atualizado com sucesso!", Menu.class);
+        } else {
+            // Criar um novo cadastro
+            dbHelper.salvarCadastro(nome, idade, enderecoId);
+            mostrarPopupSucesso("Cadastro realizado com sucesso!", Anamnese.class);
+        }
+    }
 
-        // Exibir uma mensagem de sucesso ou erro
-        Toast.makeText(this, "Cadastro salvo com sucesso!", Toast.LENGTH_SHORT).show();
+    private void voltarMenuOuLogin() {
+        // Verificar se existe cadastro e redirecionar para o Menu ou NovoLogin
+        if (dbHelper.existeCadastro()) {
+            // Ir para o Menu
+            Intent intent = new Intent(Cadastro.this, Menu.class);
+            startActivity(intent);
+        } else {
+            // Ir para o NovoLogin
+            Intent intent = new Intent(Cadastro.this, NovoLogin.class);
+            startActivity(intent);
+        }
+    }
+
+    private void mostrarPopupSucesso(String mensagem, Class<?> activityDestino) {
+        // Exibir um pop-up de confirmação
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sucesso");
+        builder.setMessage(mensagem);
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // Redirecionar para a próxima atividade
+            Intent intent = new Intent(Cadastro.this, activityDestino);
+            startActivity(intent);
+            finish(); // Fechar a atividade atual
+        });
+        builder.show();
     }
 
     private void atualizarSpinnerCidades(String estado) {

@@ -1,21 +1,16 @@
 package com.example.amigo_do_idoso_v31;
 
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 public class Anamnese extends AppCompatActivity {
 
-    private DatabaseHelper dbHelper;
     private Spinner listaDoencasCronicas, listaRemedioContinuo;
     private RadioGroup rgDoencaCronica, rgRemedioContinuo;
     private ChipGroup chipGroupDificuldades;
@@ -28,9 +23,6 @@ public class Anamnese extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anamnese);
-
-        // Initialize DatabaseHelper
-        dbHelper = new DatabaseHelper(this);
 
         listaDoencasCronicas = findViewById(R.id.lista_doencas_cronicas);
         listaRemedioContinuo = findViewById(R.id.lista_remedio_continuo);
@@ -82,20 +74,9 @@ public class Anamnese extends AppCompatActivity {
         });
 
         // Set a listener for the save button
-        findViewById(R.id.btn_salvar_anamnese).setOnClickListener(v -> atualizarBancoDeDados());
-    }
-
-    private void atualizarBancoDeDados() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase(); // Use getWritableDatabase() for update
-
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_ANAMNESE_DIFICULDADE_FALA, dificuldadeFala ? 1 : 0);
-        values.put(DatabaseHelper.COLUMN_ANAMNESE_DIFICULDADE_AUDICAO, dificuldadeAudicao ? 1 : 0);
-        values.put(DatabaseHelper.COLUMN_ANAMNESE_DIFICULDADE_VISAO, dificuldadeVisao ? 1 : 0);
-        values.put(DatabaseHelper.COLUMN_ANAMNESE_DIFICULDADE_LOCOMOCAO, dificuldadeLocomocao ? 1 : 0);
-
-        // Assuming 'id' is the ID of the record you want to update
-        int id = 1; // Replace with actual ID
-        db.update(DatabaseHelper.TABLE_ANAMNESE, values, DatabaseHelper.COLUMN_ANAMNESE_ID + " = ?", new String[]{String.valueOf(id)});
+        findViewById(R.id.btn_salvar_anamnese).setOnClickListener(v -> {
+            Intent intent = new Intent(Anamnese.this, Menu.class);
+            startActivity(intent);
+        });
     }
 }

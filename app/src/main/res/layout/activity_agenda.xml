@@ -10,7 +10,7 @@
         android:id="@+id/titulo_agenda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="12dp"
         android:text="Agenda"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/calendarView"
@@ -22,19 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="101dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtbox_descricao"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="154dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="39dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/lista_medicamentos"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
+        app:layout_constraintEnd_toStartOf="@+id/txtbox_descricao"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView">
 
         <RadioButton
@@ -64,8 +65,8 @@
         android:id="@+id/btn_salvar_agenda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="18dp"
         android:text="Salvar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -74,10 +75,25 @@
         android:id="@+id/lista_medicamentos"
         android:layout_width="223dp"
         android:layout_height="17dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_voltar_agenda_menu"
+        android:layout_marginTop="51dp"
+        android:layout_marginBottom="63dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_voltar_agenda_menu"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/txtbox_descricao"
         tools:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/txtbox_descricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="149dp"
+        android:ems="10"
+        android:hint="Descrição"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

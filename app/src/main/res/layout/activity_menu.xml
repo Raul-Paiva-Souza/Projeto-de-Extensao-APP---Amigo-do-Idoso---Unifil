@@ -7,12 +7,25 @@
     tools:context=".Menu">
 
     <TextView
+        android:id="@+id/text_saudacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titulo_Menu" />
+
+    <TextView
         android:id="@+id/titulo_Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
+        android:layout_marginBottom="63dp"
         android:text="Menu"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_menu_sos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,84 +35,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="18dp"
         android:text=" ← Sair"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menu_consultas_e_exames" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_consultasexames" />
 
     <Button
         android:id="@+id/btn_menu_cadastro"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="26dp"
         android:text="Cadastro "
         app:layout_constraintBottom_toTopOf="@+id/btn_menu_anamenese"
+        app:layout_constraintEnd_toStartOf="@+id/btn_menu_sos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_menu_anamenese"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="32dp"
         android:text="Anamenese"
-        app:layout_constraintBottom_toTopOf="@+id/btn_menu_consultas_e_exames"
+        app:layout_constraintBottom_toTopOf="@+id/btn_menu_consultasexames"
+        app:layout_constraintEnd_toStartOf="@+id/btn_menu_agenda"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_menu_cadastro" />
 
     <Button
-        android:id="@+id/btn_menu_consultas_e_exames"
+        android:id="@+id/btn_menu_consultasexames"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="106dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="103dp"
         android:text="Consultas e Exames"
         app:layout_constraintBottom_toTopOf="@+id/btn_menu_sair"
+        app:layout_constraintEnd_toStartOf="@+id/btn_menu_medicamentos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_menu_anamenese" />
 
     <Button
         android:id="@+id/btn_menu_sos"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="25dp"
         android:text="Emergência "
         app:layout_constraintBottom_toTopOf="@+id/btn_menu_agenda"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_cadastro"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_Menu" />
 
     <Button
         android:id="@+id/btn_menu_agenda"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="32dp"
         android:text="Agenda "
         app:layout_constraintBottom_toTopOf="@+id/btn_menu_medicamentos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_anamenese"
         app:layout_constraintTop_toBottomOf="@+id/btn_menu_sos" />
 
     <Button
         android:id="@+id/btn_menu_medicamentos"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="156dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="171dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="169dp"
         android:text="Medicamentos "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_consultasexames"
         app:layout_constraintTop_toBottomOf="@+id/btn_menu_agenda" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

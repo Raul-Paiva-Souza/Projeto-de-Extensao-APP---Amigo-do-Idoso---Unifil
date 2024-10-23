@@ -19,15 +19,17 @@ public class NovoLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novo_login);
 
+        // Inicializando o helper do banco de dados
         databaseHelper = new DatabaseHelper(this);
-        // Encontra o botão pelo ID
+
+        // Vinculando componentes da interface com código Java
         edtTelefone = findViewById(R.id.txtbox_tel);
         edtSenha = findViewById(R.id.txtbox_senha);
         EditText txtboxConfirmasenha = findViewById(R.id.txtbox_confirmasenha);
         Button btnCadastrar = findViewById(R.id.btn_cadastrar);
         Button btnSair = findViewById(R.id.btn_sair);
 
-        // Define o OnClickListener para o botão de cadastro
+        // Lógica do botão de cadastro
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,10 +37,15 @@ public class NovoLogin extends AppCompatActivity {
                 String senha = edtSenha.getText().toString();
                 String confirmarSenha = txtboxConfirmasenha.getText().toString();
 
+                // Verificando se as senhas correspondem
                 if (senha.equals(confirmarSenha)) {
+                    // Verificando se o telefone já está cadastrado
                     if (!databaseHelper.isTelefoneExists(telefone)) {
+                        // Adicionando o login ao banco de dados
                         databaseHelper.addLogin(telefone, senha);
-                        Toast.makeText(NovoLogin.this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NovoLogin.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
+
+                        // Redireciona para a próxima tela de cadastro
                         Intent intent = new Intent(NovoLogin.this, Cadastro.class);
                         startActivity(intent);
                     } else {
@@ -50,11 +57,12 @@ public class NovoLogin extends AppCompatActivity {
             }
         });
 
-        // Define o OnClickListener para o botão de sair
+        // Lógica para o botão sair
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Fecha a atividade atual
+                Intent intent = new Intent(NovoLogin.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

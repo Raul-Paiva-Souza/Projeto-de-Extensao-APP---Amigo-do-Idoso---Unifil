@@ -26,6 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textSize="40sp"
         app:layout_constraintTop_toTopOf="@+id/titulo_medicamentos" />
 
     <Button

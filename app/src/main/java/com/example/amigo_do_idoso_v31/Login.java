@@ -54,50 +54,58 @@ public class Login extends AppCompatActivity {
                 String telefone = edtTelefone.getText().toString().trim();
                 String senha = edtSenha.getText().toString().trim();
 
-                Log.d("LoginDebug", "Telefone digitado: " + telefone);
+                Log.d("LoginDebug", "Telefone digitado (após trim): " + telefone);
                 Log.d("LoginDebug", "Senha digitada: " + senha);
 
                 if (!telefone.isEmpty() && !senha.isEmpty()) {
-                    String hashedPassword = PasswordUtils.hashPassword(senha);
-                    Log.d("LoginDebug", "Senha hashed: " + hashedPassword);
-
                     SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                    // Consulta com JOIN para recuperar o nome do usuário da tabela Cadastro
+                    // Verificar os usuários no banco de dados antes da consulta (para depuração)
+                    Cursor testCursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_LOGIN, null);
+                    if (testCursor.moveToFirst()) {
+                        do {
+                            String dbTelefone = testCursor.getString(testCursor.getColumnIndex(DatabaseHelper.COLUMN_LOGIN_TELEFONE));
+                            String dbSenha = testCursor.getString(testCursor.getColumnIndex(DatabaseHelper.COLUMN_LOGIN_SENHA));
+                            Log.d("LoginDebug", "Usuário no banco de dados - Telefone: " + dbTelefone + ", Senha Hash: " + dbSenha);
+                        } while (testCursor.moveToNext());
+                    }
+                    testCursor.close();
+
+                    // Execute a consulta original, mas sem o JOIN para garantir que o problema não está no JOIN
                     Cursor cursor = db.rawQuery(
-                            "SELECT c." + DatabaseHelper.COLUMN_CADASTRO_NOME +
-                                    " FROM " + DatabaseHelper.TABLE_LOGIN + " l " +
-                                    " JOIN " + DatabaseHelper.TABLE_CADASTRO + " c " +
-                                    " ON l." + DatabaseHelper.COLUMN_LOGIN_TELEFONE + " = c." + DatabaseHelper.COLUMN_LOGIN_TELEFONE +
-                                    " WHERE l." + DatabaseHelper.COLUMN_LOGIN_TELEFONE + "=? AND l." + DatabaseHelper.COLUMN_LOGIN_SENHA + "=?",
-                            new String[]{telefone, hashedPassword}
+                            "SELECT " + DatabaseHelper.COLUMN_LOGIN_SENHA +
+                                    " FROM " + DatabaseHelper.TABLE_LOGIN +
+                                    " WHERE " + DatabaseHelper.COLUMN_LOGIN_TELEFONE + " = ?",
+                            new String[]{telefone}
                     );
 
+                    // Verifique se a consulta retornou algum resultado
                     if (cursor.moveToFirst()) {
-                        // Verifique se o índice da coluna é válido
-                        int nomeIndex = cursor.getColumnIndex(COLUMN_CADASTRO_NOME);
-                        if (nomeIndex != -1) {
-                            String nomeUsuario = cursor.getString(nomeIndex);
-                            Log.d("LoginDebug", "Login bem-sucedido, nome do usuário: " + nomeUsuario);
+                        int senhaIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_LOGIN_SENHA);
 
-                            // Salvar telefone, senha e nome no SharedPreferences
-                            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("Telefone", telefone);
-                            editor.putString("Senha", hashedPassword);
-                            editor.putString("Nome", nomeUsuario);
-                            editor.apply();
+                        if (senhaIndex != -1) {
+                            String storedHashedPassword = cursor.getString(senhaIndex);
+                            Log.d("LoginDebug", "Senha armazenada no banco de dados: " + storedHashedPassword);
 
-                            Toast.makeText(Login.this, "Bem-vindo de volta, " + nomeUsuario + "!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Login.this, Menu.class);
-                            startActivity(intent);
+                            // Substitua pelo método correto para verificar a senha hash
+                            if (PasswordUtils.verifyPassword(senha, storedHashedPassword)) {
+                                Log.d("LoginDebug", "Login bem-sucedido!");
+
+                                Toast.makeText(Login.this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Login.this, Menu.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Log.d("LoginDebug", "Senha incorreta");
+                                Toast.makeText(Login.this, "Credenciais inválidas.", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Log.d("LoginDebug", "A coluna nome não foi encontrada no cursor.");
-                            Toast.makeText(Login.this, "Erro ao obter o nome do usuário.", Toast.LENGTH_SHORT).show();
+                            Log.d("LoginDebug", "Coluna de senha não encontrada");
                         }
                     } else {
-                        Log.d("LoginDebug", "Credenciais inválidas");
-                        Toast.makeText(Login.this, "Credenciais inválidas.", Toast.LENGTH_SHORT).show();
+                        Log.d("LoginDebug", "Usuário não encontrado");
+                        Toast.makeText(Login.this, "Usuário não encontrado.", Toast.LENGTH_SHORT).show();
                     }
 
                     cursor.close();
@@ -108,5 +116,10 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
     }
 }

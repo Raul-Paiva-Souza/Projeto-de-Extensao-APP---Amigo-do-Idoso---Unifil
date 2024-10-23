@@ -4,38 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsultasExames">
+    tools:context=".Consultasexames">
 
     <TextView
         android:id="@+id/titulo_consultasexames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:text="Consultas e Exames"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="60dp" />
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_consultasexames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_add_consultasexames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="1dp"
         android:text="Adicionar"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="567dp" />
+        app:layout_constraintStart_toStartOf="@+id/recyclerView_consultasexames"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_consultasexames" />
 
     <Button
         android:id="@+id/btn_rmv_consultasexames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="40dp"
         android:text="Excluir"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="567dp" />
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView_consultasexames"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_consultasexames" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_consultasexames"
-        android:layout_width="409dp"
-        android:layout_height="460dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="106dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="93dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

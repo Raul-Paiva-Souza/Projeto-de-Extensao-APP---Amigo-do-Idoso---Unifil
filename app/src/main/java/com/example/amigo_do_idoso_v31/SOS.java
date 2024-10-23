@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class SOS extends AppCompatActivity {
 
     private Button btnChamarPolicia, btnChamarBombeiros, btnChamarSAMU, btnChamarContatoConfianca, btnVoltar;
