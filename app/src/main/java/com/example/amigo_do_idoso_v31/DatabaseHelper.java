@@ -12,7 +12,7 @@ import com.example.myapp.utils.PasswordUtils;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Amigo_do_Idoso.db";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
 
     // Tabelas
     public static final String TABLE_LOGIN = "Login";
@@ -38,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ENDERECO_LOGRADOURO = "Logradouro";
     public static final String COLUMN_ENDERECO_NUMERO = "Numero";
     public static final String COLUMN_ENDERECO_CIDADE = "Cidade";
+    private static final String COLUMN_ENDERECO_BAIRRO = "Bairro";
     public static final String COLUMN_ENDERECO_ESTADO = "Estado";
     public static final String COLUMN_ENDERECO_PAIS = "Pais";
 
@@ -77,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_AGENDA_RECADO = "recado";
     public static final String COLUMN_AGENDA_MEDICAMENTOS = "FK_idMedicamentos";
 
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -98,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_ENDERECO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_ENDERECO_LOGRADOURO + " VARCHAR(45), " +
                 COLUMN_ENDERECO_NUMERO + " INTEGER, " +
+                COLUMN_ENDERECO_BAIRRO + " VARCHAR(45), " +
                 COLUMN_ENDERECO_CIDADE + " VARCHAR(45), " +
                 COLUMN_ENDERECO_ESTADO + " VARCHAR(45), " +
                 COLUMN_ENDERECO_PAIS + " VARCHAR(45))";
@@ -242,7 +245,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         valores.put(COLUMN_ENDERECO_NUMERO, numero);
         valores.put(COLUMN_ENDERECO_CIDADE, cidade);
         valores.put(COLUMN_ENDERECO_ESTADO, estado);
-        return db.insert(TABLE_ENDERECO, null, valores);
+        //return db.insert(TABLE_ENDERECO, null, valores);
+        long enderecoId = db.insert(TABLE_ENDERECO, null, valores);
+        Log.d("Database", "Endereco ID: " + enderecoId);  // Adicionando log
+        return enderecoId;
     }
 
     // Método para verificar se já existe cadastro
@@ -251,8 +257,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CADASTRO, null);
         boolean existe = cursor.getCount() > 0;
         cursor.close();
+        Log.d("DatabaseHelper", "Existe cadastro: " + existe); // Adicione este log para verificar
         return existe;
     }
+
 
     // Método para salvar cadastro
     public void salvarCadastro(String nome, int idade, long enderecoId) {
@@ -261,7 +269,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CADASTRO_NOME, nome);
         values.put(COLUMN_CADASTRO_IDADE, idade);
         values.put(COLUMN_CADASTRO_ENDERECO, enderecoId);
-        db.insert(TABLE_CADASTRO, null, values);
+        Log.d("Database", "Salvando cadastro: Nome=" + nome + ", Idade=" + idade + ", EnderecoID=" +
+                db.insert(TABLE_CADASTRO, null, values));
         db.close();
     }
 
@@ -323,6 +332,61 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return numero;
     }
 
+    // Método para obter os dados de anamnese
+    public Cursor obterAnamnese(String telefone) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_ANAMNESE + " WHERE " + COLUMN_ANAMNESE_ID + " = ?";
+        Log.d("DatabaseHelper", "Query: " + query);
+        return db.rawQuery(query, new String[]{telefone});
+    }
+
+    // Método para salvar ou atualizar os dados de anamnese
+    public boolean salvarAnamnese(String doencaCronica, String remedioContinuo, String dificuldades) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ANAMNESE_DOENCAS, doencaCronica);
+        values.put(COLUMN_ANAMNESE_MEDICAMENTO_CONTINUO, remedioContinuo);
+        values.put(COLUMN_ANAMNESE_DIFICULDADE_LOCOMOCAO, dificuldades.contains("Locomoção") ? 1 : 0);
+        values.put(COLUMN_ANAMNESE_DIFICULDADE_FALA, dificuldades.contains("Fala") ? 1 : 0);
+        values.put(COLUMN_ANAMNESE_DIFICULDADE_AUDICAO, dificuldades.contains("Audição") ? 1 : 0);
+        values.put(COLUMN_ANAMNESE_DIFICULDADE_VISAO, dificuldades.contains("Visão") ? 1 : 0);
+
+        // Verificar se já existe um registro para o usuário
+        Cursor cursor = obterAnamnese(obterTelefoneUsuarioLogado());
+        boolean existeRegistro = cursor != null && cursor.moveToFirst();
+        long result;
+
+        if (existeRegistro) {
+            result = db.update(TABLE_ANAMNESE, values, COLUMN_ANAMNESE_ID + " = ?", new String[]{obterTelefoneUsuarioLogado()});
+        } else {
+            values.put(COLUMN_ANAMNESE_ID, obterTelefoneUsuarioLogado());
+            result = db.insert(TABLE_ANAMNESE, null, values);
+        }
+        cursor.close();
+        return result != -1;
+    }
+    public String obterTelefoneUsuarioLogado() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_LOGIN,
+                new String[]{COLUMN_LOGIN_TELEFONE},
+                null, null, null, null, null);
+
+        String telefoneUsuario = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            int telefoneIndex = cursor.getColumnIndex(COLUMN_LOGIN_TELEFONE);
+            if (telefoneIndex != -1) {  // Verifica se o índice existe
+                telefoneUsuario = cursor.getString(telefoneIndex);
+            } else {
+                Log.e("DatabaseHelper", "Coluna " + COLUMN_LOGIN_TELEFONE + " não encontrada.");
+            }
+            cursor.close();
+        }
+
+        return telefoneUsuario;
+    }
+
+
+
     // Método para buscar o nome do usuário a partir do telefone
     public String getNomeUsuario(String telefone) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -337,12 +401,73 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Verifique se encontrou algum resultado
         if (cursor.moveToFirst()) {
-            nomeUsuario = cursor.getString(cursor.getColumnIndex(COLUMN_CADASTRO_NOME));
+            int nomeIndex = cursor.getColumnIndex(COLUMN_CADASTRO_NOME);
+            if (nomeIndex != -1) {
+                nomeUsuario = cursor.getString(nomeIndex);
+            } else {
+                Log.e("DatabaseHelper", "Coluna " + COLUMN_CADASTRO_NOME + " não encontrada no cursor.");
+            }
         }
+
 
         cursor.close();
         return nomeUsuario; // Retorna o nome do usuário ou null se não encontrado
     }
+
+    // Método para obter o cadastro completo do usuário com base no telefone
+    public Cursor obterCadastro(String telefone) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT c." + COLUMN_CADASTRO_NOME + " AS nome, " +
+                "c." + COLUMN_CADASTRO_IDADE + " AS idade, " +
+                "e." + COLUMN_ENDERECO_LOGRADOURO + " AS rua, " +
+                "e." + COLUMN_ENDERECO_NUMERO + " AS numero, " +
+                "e." + COLUMN_ENDERECO_BAIRRO + " AS bairro, " +
+                "e." + COLUMN_ENDERECO_CIDADE + " AS cidade, " +
+                "e." + COLUMN_ENDERECO_ESTADO + " AS estado " +
+                "FROM " + TABLE_CADASTRO + " c " +
+                "JOIN " + TABLE_ENDERECO + " e ON c." + COLUMN_CADASTRO_ENDERECO + " = e." + COLUMN_ENDERECO_ID +
+                " JOIN " + TABLE_LOGIN + " l ON l." + COLUMN_LOGIN_TELEFONE + " = l." + COLUMN_LOGIN_TELEFONE +  // corrigindo a junção com login
+                " WHERE l." + COLUMN_LOGIN_TELEFONE + " = ?";
+        Log.d("DatabaseHelper", "Query: " + query);
+        Cursor cursor = db.rawQuery(query, new String[]{telefone});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int nomeIndex = cursor.getColumnIndex("nome");
+                int idadeIndex = cursor.getColumnIndex("idade");
+                int ruaIndex = cursor.getColumnIndex("rua");
+                int numeroIndex = cursor.getColumnIndex("numero");
+                int bairroIndex = cursor.getColumnIndex("bairro");
+                int cidadeIndex = cursor.getColumnIndex("cidade");
+                int estadoIndex = cursor.getColumnIndex("estado");
+
+                if (nomeIndex != -1 && idadeIndex != -1 && ruaIndex != -1 && numeroIndex != -1 &&
+                        bairroIndex != -1 && cidadeIndex != -1 && estadoIndex != -1) {
+                    Log.d("DatabaseHelper", "Nome: " + cursor.getString(nomeIndex) +
+                            ", Idade: " + cursor.getInt(idadeIndex) +
+                            ", Rua: " + cursor.getString(ruaIndex) +
+                            ", Numero: " + cursor.getInt(numeroIndex) +
+                            ", Bairro: " + cursor.getString(bairroIndex) +
+                            ", Cidade: " + cursor.getString(cidadeIndex) +
+                            ", Estado: " + cursor.getString(estadoIndex));
+                } else {
+                    Log.e("DatabaseHelper", "Coluna não encontrada no cursor.");
+                }
+            } while (cursor.moveToNext());
+        } else {
+            Log.e("DatabaseHelper", "Cursor vazio ou null.");
+        }
+
+        return cursor;
+    }
+
+
+
+
+
+
+
+
 
 
 }
