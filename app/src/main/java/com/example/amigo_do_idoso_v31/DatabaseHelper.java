@@ -461,14 +461,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-
-
-
-
-
-
-
-
-
 }
 
