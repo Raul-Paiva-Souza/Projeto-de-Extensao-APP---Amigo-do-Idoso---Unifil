@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+import java.util.List;
+import java.util.ArrayList;
 import com.example.myapp.utils.PasswordUtils;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -301,6 +302,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
 
+    }
+
+    public List<Medicamento> getAllMedicamentos() {
+        List<Medicamento> medicamentos = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_MEDICAMENTOS, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex(COLUMN_MEDICAMENTOS_ID);
+                int nomeIndex = cursor.getColumnIndex(COLUMN_MEDICAMENTOS_NOME);
+                int dosagemIndex = cursor.getColumnIndex(COLUMN_MEDICAMENTOS_DOSAGEM);
+
+                if (idIndex != -1 && nomeIndex != -1 && dosagemIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String nome = cursor.getString(nomeIndex);
+                    double dosagem = cursor.getDouble(dosagemIndex);
+
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem);
+                    medicamentos.add(medicamento);
+                } else {
+                    Log.e("DatabaseHelper", "Coluna não encontrada no cursor.");
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return medicamentos;
     }
 
     public String getContatoDeConfiança() {
