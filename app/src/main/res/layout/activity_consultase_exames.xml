@@ -4,50 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".Consultasexames">
 
     <TextView
         android:id="@+id/titulo_consultasexames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="69dp"
         android:text="Consultas e Exames"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_consultasexames"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_add_consultasexames"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="1dp"
-        android:text="Adicionar"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView_consultasexames"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_consultasexames" />
-
-    <Button
-        android:id="@+id/btn_rmv_consultasexames"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="40dp"
-        android:text="Excluir"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView_consultasexames"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_consultasexames" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_consultasexames"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="93dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="93dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_consultasexames"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_descricao_consultaexame" />
+
+    <Button
+        android:id="@+id/btn_add_consultasexames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="26dp"
+        android:text="Adicionar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_rmv_consultasexames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="26dp"
+        android:text="Excluir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_descricao_consultaexame"
+        android:layout_width="112dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="48dp"
+        android:text="Descrição"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView_consultasexames"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_consultasexames" />
+
+    <TextView
+        android:id="@+id/tv_data_consultaexame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="26dp"
+        android:text="Data"
+        android:textColor="#666666"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_consultasexames"
+        app:layout_constraintEnd_toEndOf="@+id/titulo_consultasexames" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

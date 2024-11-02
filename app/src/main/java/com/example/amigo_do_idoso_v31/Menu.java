@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.example.amigo_do_idoso_v31.ConsultasExamesActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,7 +58,7 @@ public class Menu extends AppCompatActivity {
 
         btnAnamnese.setOnClickListener(v -> startActivity(new Intent(Menu.this, Anamnese.class)));
 
-        btnConsultasexames.setOnClickListener(v -> startActivity(new Intent(Menu.this, Consultasexames.class)));
+        btnConsultasexames.setOnClickListener(v -> startActivity(new Intent(Menu.this, ConsultasExamesActivity.class)));
 
         btnEmergencia.setOnClickListener(v -> startActivity(new Intent(Menu.this, SOS.class)));
 

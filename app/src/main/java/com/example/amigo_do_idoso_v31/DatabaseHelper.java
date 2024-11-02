@@ -6,14 +6,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import com.example.myapp.utils.PasswordUtils;
+import com.google.type.DateTime;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Amigo_do_Idoso.db";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     // Tabelas
     public static final String TABLE_LOGIN = "Login";
@@ -22,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_CADASTRO = "Cadastro";
     public static final String TABLE_SOS = "SOS";
     public static final String TABLE_MEDICAMENTOS = "Medicamentos";
+    public static final String TABLE_CONSULTAS_EXAMES = "ConsultasExames";
     public static final String TABLE_ANAMNESE = "Anamnese";
     public static final String TABLE_AGENDA = "Agenda";
 
@@ -60,6 +67,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MEDICAMENTOS_DOSAGEM = "dosagem";
     public static final String COLUMN_MEDICAMENTOS_MEDIDA_DOSAGEM = "tipo_dosagem";
 
+
+    // Colunas da tabela ConsultasExames
+    public static final String COLUMN_CONSULTAS_EXAMES_ID = "idConsultaExame";
+    public static final String COLUMN_CONSULTAS_EXAMES_DESCRICAO = "descricaoConsultaExame";
+    public static final String COLUMN_CONSULTAS_EXAMES_DATA = "dataConsultaExame";
 
     // Colunas da tabela Anamnese
     public static final String COLUMN_ANAMNESE_ID = "PK_Anamnese";
@@ -124,6 +136,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_MEDICAMENTOS_DOSAGEM + " VARCHAR(45), " +
                 COLUMN_MEDICAMENTOS_MEDIDA_DOSAGEM + " VARCHAR(45)) ";
 
+        String createConsultasExamesTable = "CREATE TABLE " + TABLE_CONSULTAS_EXAMES + " (" +
+                COLUMN_CONSULTAS_EXAMES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_CONSULTAS_EXAMES_DESCRICAO + " TEXT NOT NULL, " +
+                COLUMN_CONSULTAS_EXAMES_DATA + " DATE NOT NULL)";
+
+
+
         String createAnamneseTable = "CREATE TABLE " + TABLE_ANAMNESE + " (" +
                 COLUMN_ANAMNESE_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_ANAMNESE_DOENCAS + " TEXT, " +
@@ -150,6 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createCadastroTable);
         db.execSQL(createSosTable);
         db.execSQL(createMedicamentosTable);
+        db.execSQL(createConsultasExamesTable);
         db.execSQL(createAnamneseTable);
         db.execSQL(createAgendaTable);
 
@@ -167,6 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_AGENDA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ANAMNESE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDICAMENTOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONSULTAS_EXAMES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CADASTRO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ENDERECO);
@@ -212,21 +233,72 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // Método para adicionar uma consulta/exame
-    public void addConsultaExame(Consultasexames consultaExame) {
+    public void addConsultaExame(ConsultaExame consultaExame) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("descricao_consultasexame", consultaExame.getDescricao_consultaexame());
-        values.put("dataexame", consultaExame.getDataexame().toString());
-        db.insert("ConsultasExames", null, values);
+        values.put(COLUMN_CONSULTAS_EXAMES_DESCRICAO, consultaExame.getDescricao());
+        values.put(COLUMN_CONSULTAS_EXAMES_DATA, consultaExame.getDataExame().toString());
+        long result = db.insert(TABLE_CONSULTAS_EXAMES, null, values);
+        if (result == -1) {
+            Log.e("DatabaseHelper", "Erro ao inserir consulta/exame");
+        } else {
+            Log.i("DatabaseHelper", "Consulta/exame inserido com sucesso");
+        }
         db.close();
     }
 
-    // Método para remover uma consulta/exame pelo ID
+
+
+
     public void removeConsultaExame(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("ConsultasExames", "idConsultaexame = ?", new String[]{String.valueOf(id)});
+        db.delete(TABLE_CONSULTAS_EXAMES, COLUMN_CONSULTAS_EXAMES_ID + "=?", new String[]{String.valueOf(id)});
         db.close();
     }
+
+    public List<ConsultaExame> getAllConsultasExames() {
+        List<ConsultaExame> consultasExamesList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CONSULTAS_EXAMES, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex(COLUMN_CONSULTAS_EXAMES_ID);
+                int descricaoIndex = cursor.getColumnIndex(COLUMN_CONSULTAS_EXAMES_DESCRICAO);
+                int dataIndex = cursor.getColumnIndex(COLUMN_CONSULTAS_EXAMES_DATA);
+
+                if (idIndex != -1 && descricaoIndex != -1 && dataIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String descricao = cursor.getString(descricaoIndex);
+                    String dataStr = cursor.getString(dataIndex);
+
+                    try {
+                        // Ajuste do formato da data
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        Date date = sdf.parse(dataStr);
+                        DateTime dataExame = DateTime.newBuilder()
+                                .setYear(date.getYear() + 1900)
+                                .setMonth(date.getMonth() + 1)
+                                .setDay(date.getDate())
+                                .build();
+
+                        ConsultaExame consultaExame = new ConsultaExame(id, descricao, dataExame);
+                        consultasExamesList.add(consultaExame);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return consultasExamesList;
+    }
+
+    
+
+
 
     // Método para inserir dados na tabela Cadastro
     public long inserirCadastro(String nome, int idade, long enderecoId) {

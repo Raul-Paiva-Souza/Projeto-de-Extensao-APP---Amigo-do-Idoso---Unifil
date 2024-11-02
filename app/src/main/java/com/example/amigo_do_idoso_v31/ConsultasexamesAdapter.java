@@ -1,5 +1,6 @@
 package com.example.amigo_do_idoso_v31;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,44 +9,57 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class ConsultasexamesAdapter extends RecyclerView.Adapter<ConsultasexamesAdapter.ConsultasexameViewHolder> {
+public class ConsultasexamesAdapter extends RecyclerView.Adapter<ConsultasexamesAdapter.ConsultasexamesViewHolder> {
 
-    private List<Consultasexames> consultasexameList;
+    private List<ConsultaExame> consultasExamesList;
+    private OnConsultaExameClickListener listener;
 
-    public ConsultasexamesAdapter(List<Consultasexames> consultasexameList) {
-        this.consultasexameList = consultasexameList;
+    public ConsultasexamesAdapter(List<ConsultaExame> consultasExamesList, OnConsultaExameClickListener listener) {
+        this.consultasExamesList = consultasExamesList;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ConsultasexameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_consultasexames, parent, false);
-        return new ConsultasexameViewHolder(view);
+    public ConsultasexamesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_consulta_exame, parent, false);
+        return new ConsultasexamesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConsultasexameViewHolder holder, int position) {
-        Consultasexames consultaExame = consultasexameList.get(position);
-        holder.descricao_consultasexames.setText(consultaExame.getDescricao_consultaexame());
-        holder.data_consultasexames.setText(consultaExame.getDataexame().toString());
-        holder.horario_consultasexames.setText(consultaExame.getHorarioexame().toString());
+    public void onBindViewHolder(@NonNull ConsultasexamesViewHolder holder, int position) {
+        ConsultaExame consultaExame = consultasExamesList.get(position);
+        holder.tvDescricao.setText(consultaExame.getDescricao());
+        holder.tvData.setText(consultaExame.getDataExame().toString());
+
+        // Verifique se este é o item selecionado e aplique o destaque
+        ConsultasExamesActivity activity = (ConsultasExamesActivity) holder.itemView.getContext();
+        if (consultaExame.equals(activity.getConsultaExameSelecionado())) {
+            holder.itemView.setBackgroundColor(Color.LTGRAY);
+        } else {
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+        holder.itemView.setOnClickListener(v -> listener.onConsultaExameClick(consultaExame));
     }
 
     @Override
     public int getItemCount() {
-        return consultasexameList.size();
+        return consultasExamesList.size();
     }
 
-    public static class ConsultasexameViewHolder extends RecyclerView.ViewHolder {
-        TextView descricao_consultasexames;
-        TextView data_consultasexames;
+    public interface OnConsultaExameClickListener {
+        void onConsultaExameClick(ConsultaExame consultaExame);
+    }
 
-        TextView horario_consultasexames;
-        public ConsultasexameViewHolder(@NonNull View itemView) {
+    public static class ConsultasexamesViewHolder extends RecyclerView.ViewHolder {
+        TextView tvDescricao;
+        TextView tvData;
+
+        public ConsultasexamesViewHolder(@NonNull View itemView) {
             super(itemView);
-            descricao_consultasexames = itemView.findViewById(R.id.descricao_consultasexames);
-            data_consultasexames = itemView.findViewById(R.id.data_consultasexames);
-            horario_consultasexames = itemView.findViewById(R.id.horario_consultasexames);
+            tvDescricao = itemView.findViewById(R.id.tv_descricao_consultaexame);
+            tvData = itemView.findViewById(R.id.tv_data_consultaexame);
         }
     }
 }

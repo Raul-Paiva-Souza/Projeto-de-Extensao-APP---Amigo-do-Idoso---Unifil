@@ -20,8 +20,9 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".Consultasexames"
-            android:exported="false" />
+            android:name=".ConsultasExamesActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Medicamentos"
             android:exported="false" />

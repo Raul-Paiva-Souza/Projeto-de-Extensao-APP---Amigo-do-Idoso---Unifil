@@ -9,14 +9,13 @@
         android:id="@+id/input_descricao_consultaexame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descrição da Consulta/Exame"
-        android:inputType="text" />
+        android:hint="Descrição da Consulta/Exame" />
 
     <EditText
         android:id="@+id/input_data_consultaexame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data (yyyy-MM-dd)"
+        android:hint="Data (dd-MM-yyyy)"
         android:inputType="date" />
 
 </LinearLayout>
