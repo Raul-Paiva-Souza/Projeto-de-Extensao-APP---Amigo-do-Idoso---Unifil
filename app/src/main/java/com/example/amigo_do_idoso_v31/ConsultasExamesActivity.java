@@ -34,6 +34,7 @@ public class ConsultasExamesActivity extends AppCompatActivity implements Consul
         recyclerViewConsultasExames.setLayoutManager(new LinearLayoutManager(this));
 
         databaseHelper = new DatabaseHelper(this);
+
         // Carregar consultas e exames do banco de dados
         consultasExamesList = databaseHelper.getAllConsultasExames();
 
@@ -101,6 +102,7 @@ public class ConsultasExamesActivity extends AppCompatActivity implements Consul
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
+
 
     private void exibirDialogoConfirmacaoExclusao() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

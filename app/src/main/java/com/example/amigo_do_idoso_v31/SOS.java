@@ -1,15 +1,19 @@
 package com.example.amigo_do_idoso_v31;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-
+import android.widget.Toast;
 
 public class SOS extends AppCompatActivity {
 
+    private static final int REQUEST_CALL_PERMISSION = 1;
     private Button btnChamarPolicia, btnChamarBombeiros, btnChamarSAMU, btnChamarContatoConfianca, btnVoltar;
 
     @Override
@@ -29,18 +33,34 @@ public class SOS extends AppCompatActivity {
 
         btnChamarContatoConfianca.setOnClickListener(v -> {
             DatabaseHelper dbHelper = new DatabaseHelper(SOS.this);
-            String contato = dbHelper.getContatoDeConfiança(); // Método para buscar o contato de confiança
+            String contato = dbHelper.getContatoDeConfiança();
             fazerChamada(contato);
         });
 
-        btnVoltar.setOnClickListener(v -> finish()); // Voltar para a activity anterior
+        btnVoltar.setOnClickListener(v -> finish());
     }
 
     private void fazerChamada(String numero) {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + numero));
-        if (intent.resolveActivity(getPackageManager()) != null) {
+        // Verifica permissão antes de realizar a chamada
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + numero));
             startActivity(intent);
+        } else {
+            // Solicita permissão se não estiver concedida
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CALL_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permissão concedida. Tente novamente.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permissão de chamada não concedida.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

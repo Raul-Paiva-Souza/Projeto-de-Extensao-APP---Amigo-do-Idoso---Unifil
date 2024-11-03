@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/dataTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/horarioTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/horarioTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Horário"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dataTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tipoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Tipo"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataTextView" />
+
+    <TextView
+        android:id="@+id/recadoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Recado"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipoTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

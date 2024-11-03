@@ -237,7 +237,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_CONSULTAS_EXAMES_DESCRICAO, consultaExame.getDescricao());
-        values.put(COLUMN_CONSULTAS_EXAMES_DATA, consultaExame.getDataExame().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String dataStr = sdf.format(new Date(consultaExame.getDataExame().getYear() - 1900,
+                consultaExame.getDataExame().getMonth() - 1,
+                consultaExame.getDataExame().getDay()));
+        values.put(COLUMN_CONSULTAS_EXAMES_DATA, dataStr);
         long result = db.insert(TABLE_CONSULTAS_EXAMES, null, values);
         if (result == -1) {
             Log.e("DatabaseHelper", "Erro ao inserir consulta/exame");
@@ -273,7 +277,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     String dataStr = cursor.getString(dataIndex);
 
                     try {
-                        // Ajuste do formato da data
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         Date date = sdf.parse(dataStr);
                         DateTime dataExame = DateTime.newBuilder()
@@ -296,7 +299,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return consultasExamesList;
     }
 
-    
+
+
+
 
 
 
@@ -562,6 +567,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+    public void addAgendaItem(String data, String horario, String tipo, String recado, int medicamentoId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_AGENDA_DATA, data);
+        values.put(COLUMN_AGENDA_HORARIO, horario);
+        values.put(COLUMN_AGENDA_TOM_TOQUE, tipo);
+        values.put(COLUMN_AGENDA_RECADO, recado);
+        values.put(COLUMN_AGENDA_MEDICAMENTOS, medicamentoId);
+
+        long result = db.insert(TABLE_AGENDA, null, values);
+        if (result == -1) {
+            Log.e("DatabaseHelper", "Erro ao inserir item na agenda");
+        } else {
+            Log.i("DatabaseHelper", "Item da agenda inserido com sucesso");
+        }
+
+        db.insert(TABLE_AGENDA, null, values);
+
+        db.close();
+    }
+
+    public List<AgendaItem> getAllAgendaItems() {
+        List<AgendaItem> agendaItems = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_AGENDA, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_ID));
+                String data = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_DATA));
+                String horario = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_HORARIO));
+                String tipo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_TOM_TOQUE));
+                String recado = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_RECADO));
+                int medicamentoId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGENDA_MEDICAMENTOS));
+
+                AgendaItem agendaItem = new AgendaItem(id, data, horario, tipo, recado, medicamentoId);
+                agendaItems.add(agendaItem);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return agendaItems;
+    }
+
 
 }
 

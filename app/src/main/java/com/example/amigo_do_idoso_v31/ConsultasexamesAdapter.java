@@ -26,11 +26,15 @@ public class ConsultasexamesAdapter extends RecyclerView.Adapter<Consultasexames
         return new ConsultasexamesViewHolder(view);
     }
 
+
     @Override
+
     public void onBindViewHolder(@NonNull ConsultasexamesViewHolder holder, int position) {
         ConsultaExame consultaExame = consultasExamesList.get(position);
         holder.tvDescricao.setText(consultaExame.getDescricao());
-        holder.tvData.setText(consultaExame.getDataExame().toString());
+        holder.tvData.setText(consultaExame.getDataExame().getYear() + "/" +
+                consultaExame.getDataExame().getMonth() + "/" +
+                consultaExame.getDataExame().getDay());
 
         // Verifique se este é o item selecionado e aplique o destaque
         ConsultasExamesActivity activity = (ConsultasExamesActivity) holder.itemView.getContext();
