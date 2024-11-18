@@ -13,6 +13,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -95,23 +96,45 @@ public class Agenda extends AppCompatActivity {
             }
 
             if (!dataSelecionada.isEmpty() && !horaSelecionada.isEmpty() && !tipoAgendamento.isEmpty()) {
-                String recado = recadoEditText.getText().toString();
-                AgendaItem novoItem = new AgendaItem(0, dataSelecionada, horaSelecionada, tipoAgendamento, recado, -1);
+                try {
+                    String recado = recadoEditText.getText().toString();
+                    AgendaItem novoItem = new AgendaItem(0, dataSelecionada, horaSelecionada, tipoAgendamento, recado, -1);
 
-                databaseHelper.addAgendaItem(dataSelecionada, horaSelecionada, tipoAgendamento, recado, -1);
-                setAlarm(novoItem);
+                    databaseHelper.addAgendaItem(dataSelecionada, horaSelecionada, tipoAgendamento, recado, -1);
+                    setAlarm(novoItem);
 
-                // Recarregar a lista e atualizar a interface
-                List<AgendaItem> agendaItemsAtualizada = databaseHelper.getAllAgendaItems();
-                adapter.updateAgendaItems(agendaItemsAtualizada);
+                    // Recarregar a lista e atualizar a interface
+                    List<AgendaItem> agendaItemsAtualizada = databaseHelper.getAllAgendaItems();
+                    adapter.updateAgendaItems(agendaItemsAtualizada);
 
-                exibirAlerta(tipoAgendamento + " agendado com sucesso!");
+                    exibirAlerta(tipoAgendamento + " agendado com sucesso!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("Agenda", "Erro ao salvar agendamento", e); // Log completo
+                    Toast.makeText(this, "Erro ao salvar agendamento: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             } else {
                 exibirAlerta("Selecione todos os campos");
             }
         });
 
-        btnAgendaSair.setOnClickListener(v -> startActivity(new Intent(Agenda.this, Menu.class)));
+
+        btnAgendaSair.setOnClickListener(v -> {
+            Intent intent = new Intent(Agenda.this, Menu.class);
+            startActivity(intent);
+            finish(); // Encerra a Activity atual
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            if (!alarmManager.canScheduleExactAlarms()) {
+                Toast.makeText(this, "Por favor, permita alarmes exatos nas configurações.", Toast.LENGTH_LONG).show();
+                // Opcional: abrir configurações
+                Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivity(intent);
+            }
+        }
+
     }
 
     // Método para configurar o alarme
@@ -129,13 +152,20 @@ public class Agenda extends AppCompatActivity {
 
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("mensagem", item.getRecado());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, item.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                item.getId(),
+                intent,
+                PendingIntent.FLAG_IMMUTABLE // Corrigido: Adicionada a flag
+        );
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (alarmManager != null) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         }
     }
+
 
     private void exibirAlerta(String mensagem) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
