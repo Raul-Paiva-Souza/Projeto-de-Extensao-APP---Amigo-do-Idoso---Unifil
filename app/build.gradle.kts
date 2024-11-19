@@ -19,10 +19,10 @@ android {
 
     signingConfigs {
         create("releaseConfig") {
-            keyAlias = "my-key-alias"
+            keyAlias = "mykeyalias"
             keyPassword = "boraformar"
-            storeFile = file("path/to/your/keystore.jks")
-            storePassword = "yourStorePassword"
+            storeFile = file("C:/Users/umtal/OneDrive/Documents/FACUL/materias/EXTENSÃO/my-release-key.jks")
+            storePassword = "boraformar"
         }
     }
 
@@ -41,6 +41,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
