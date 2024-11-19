@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import com.example.myapp.utils.PasswordUtils;
-import com.google.type.DateTime;
+//import com.google.type.DateTime;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -245,10 +246,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_CONSULTAS_EXAMES_DESCRICAO, consultaExame.getDescricao());
+
+        // Supondo que `consultaExame.getDataExame()` retorna um objeto Date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String dataStr = sdf.format(new Date(consultaExame.getDataExame().getYear() - 1900,
-                consultaExame.getDataExame().getMonth() - 1,
-                consultaExame.getDataExame().getDay()));
+        String dataStr = sdf.format(consultaExame.getDataExame()); // Formata a data diretamente
+
         values.put(COLUMN_CONSULTAS_EXAMES_DATA, dataStr);
         long result = db.insert(TABLE_CONSULTAS_EXAMES, null, values);
         if (result == -1) {
@@ -258,6 +260,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
     }
+
 
 
 
@@ -286,14 +289,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     try {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                        Date date = sdf.parse(dataStr);
-                        DateTime dataExame = DateTime.newBuilder()
-                                .setYear(date.getYear() + 1900)
-                                .setMonth(date.getMonth() + 1)
-                                .setDay(date.getDate())
-                                .build();
+                        Date date = sdf.parse(dataStr); // Formatar a data corretamente
 
-                        ConsultaExame consultaExame = new ConsultaExame(id, descricao, dataExame);
+                        // Criar um objeto Date
+                        ConsultaExame consultaExame = new ConsultaExame(id, descricao, date);
                         consultasExamesList.add(consultaExame);
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -301,7 +300,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return consultasExamesList;

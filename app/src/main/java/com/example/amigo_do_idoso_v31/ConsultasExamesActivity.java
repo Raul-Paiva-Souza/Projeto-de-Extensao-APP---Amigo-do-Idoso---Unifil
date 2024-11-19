@@ -10,7 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.type.DateTime;
+//import com.google.type.DateTime;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,13 +79,9 @@ public class ConsultasExamesActivity extends AppCompatActivity implements Consul
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                 Date date = sdf.parse(dataStr);
-                DateTime dataExame = DateTime.newBuilder()
-                        .setYear(date.getYear() + 1900)
-                        .setMonth(date.getMonth() + 1)
-                        .setDay(date.getDate())
-                        .build();
 
-                ConsultaExame novaConsultaExame = new ConsultaExame(0, descricao, dataExame);
+                // Usar a data diretamente
+                ConsultaExame novaConsultaExame = new ConsultaExame(0, descricao, date);
 
                 // Adicionar ao banco de dados
                 databaseHelper.addConsultaExame(novaConsultaExame);
@@ -93,7 +90,7 @@ public class ConsultasExamesActivity extends AppCompatActivity implements Consul
                 consultasExamesList.clear();
                 consultasExamesList.addAll(databaseHelper.getAllConsultasExames());
                 adapter.notifyDataSetChanged();
-            } catch (Exception e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Erro ao formatar a data. Use o formato dia-mês-ano.", Toast.LENGTH_SHORT).show();
             }
@@ -102,6 +99,7 @@ public class ConsultasExamesActivity extends AppCompatActivity implements Consul
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
+
 
 
     private void exibirDialogoConfirmacaoExclusao() {

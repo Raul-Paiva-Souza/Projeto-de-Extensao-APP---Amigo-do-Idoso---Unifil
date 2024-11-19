@@ -1,14 +1,16 @@
 package com.example.amigo_do_idoso_v31;
 
-import com.google.type.DateTime;
+//import com.google.type.DateTime;
+
+import java.util.Date;
 
 public class ConsultaExame {
 
     private int idConsultaExame;
     private String descricao;
-    private DateTime dataExame;
+    private Date dataExame;
 
-    public ConsultaExame(int idConsultaExame, String descricao, DateTime dataExame) {
+    public ConsultaExame(int idConsultaExame, String descricao, Date dataExame) {
         this.idConsultaExame = idConsultaExame;
         this.descricao = descricao;
         this.dataExame = dataExame;
@@ -22,7 +24,7 @@ public class ConsultaExame {
         return descricao;
     }
 
-    public DateTime getDataExame() {
+    public Date getDataExame() {
         return dataExame;
     }
 }
