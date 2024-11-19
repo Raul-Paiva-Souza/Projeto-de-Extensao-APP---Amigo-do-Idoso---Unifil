@@ -27,11 +27,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);{
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(1, builder.build());
 
         // Verificar permissão antes de tocar o alarme
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.VIBRATE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
             try {
                 MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.alarm_sound);
                 mediaPlayer.setOnCompletionListener(mp -> mp.release());
@@ -42,5 +42,5 @@ public class AlarmReceiver extends BroadcastReceiver {
         } else {
             Toast.makeText(context, "Permissão para áudio/vibração não concedida", Toast.LENGTH_SHORT).show();
         }
-    }}
+    }
 }

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import android.os.Build;
 
 public class PermissionHelper {
 
@@ -16,8 +17,20 @@ public class PermissionHelper {
                 android.Manifest.permission.CALL_PHONE,
                 android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.CAMERA,
-                android.Manifest.permission.SCHEDULE_EXACT_ALARM // Para exatidão de alarmes
+                android.Manifest.permission.VIBRATE,
+                android.Manifest.permission.SCHEDULE_EXACT_ALARM
         };
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions = new String[]{
+                    android.Manifest.permission.CALL_PHONE,
+                    android.Manifest.permission.RECORD_AUDIO,
+                    android.Manifest.permission.CAMERA,
+                    android.Manifest.permission.VIBRATE,
+                    android.Manifest.permission.SCHEDULE_EXACT_ALARM,
+                    android.Manifest.permission.POST_NOTIFICATIONS
+            };
+        }
 
         // Lista de permissões a solicitar
         boolean hasPermission = true;
@@ -34,5 +47,16 @@ public class PermissionHelper {
         }
 
         return true;
+    }
+
+    public static void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    // A permissão não foi concedida, informe o usuário
+                    // Nota: Use um mecanismo adequado para informar ao usuário sobre permissões não concedidas
+                }
+            }
+        }
     }
 }

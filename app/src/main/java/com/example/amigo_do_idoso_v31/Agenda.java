@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -125,19 +126,10 @@ public class Agenda extends AppCompatActivity {
             finish(); // Encerra a Activity atual
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            if (!alarmManager.canScheduleExactAlarms()) {
-                Toast.makeText(this, "Por favor, permita alarmes exatos nas configurações.", Toast.LENGTH_LONG).show();
-                // Opcional: abrir configurações
-                Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                startActivity(intent);
-            }
-        }
-
     }
 
     // Método para configurar o alarme
+    @SuppressLint("ScheduleExactAlarm")
     private void setAlarm(AgendaItem item) {
         Calendar calendar = Calendar.getInstance();
         String[] dataParts = item.getData().split("/");
@@ -153,11 +145,12 @@ public class Agenda extends AppCompatActivity {
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("mensagem", item.getRecado());
 
+        // Adicionar FLAG_IMMUTABLE no PendingIntent
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
                 item.getId(),
                 intent,
-                PendingIntent.FLAG_IMMUTABLE // Corrigido: Adicionada a flag
+                PendingIntent.FLAG_IMMUTABLE // Importante para Android 12+
         );
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
