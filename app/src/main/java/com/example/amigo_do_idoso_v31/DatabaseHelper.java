@@ -31,6 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_CONSULTAS_EXAMES = "ConsultasExames";
     public static final String TABLE_ANAMNESE = "Anamnese";
     public static final String TABLE_AGENDA = "Agenda";
+    public static final String TABLE_ESTADOS = "Estados";
+    public static final String TABLE_CIDADES = "Cidades";
+
 
     // Colunas da tabela Login
     public static final String COLUMN_LOGIN_SENHA = "senha";
@@ -98,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         String createLoginTable = "CREATE TABLE " + TABLE_LOGIN + " (" +
                 COLUMN_LOGIN_TELEFONE + " TEXT PRIMARY KEY, " +
                 COLUMN_LOGIN_SENHA + " STRING(128) NOT NULL)";
@@ -162,6 +166,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_AGENDA_MEDICAMENTOS + " INTEGER, " +
                 "FOREIGN KEY (" + COLUMN_AGENDA_MEDICAMENTOS + ") REFERENCES " + TABLE_MEDICAMENTOS + "(" + COLUMN_MEDICAMENTOS_ID + "))";
 
+
+
         // Executa os comandos SQL para criar as tabelas
         db.execSQL(createLoginTable);
         db.execSQL(createUsuarioIdosoTable);
@@ -193,6 +199,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ENDERECO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO_IDOSO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ESTADOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CIDADES);
 
         // Cria as tabelas novamente
         onCreate(db);
@@ -611,6 +619,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return agendaItems;
     }
+
 
 
 }
