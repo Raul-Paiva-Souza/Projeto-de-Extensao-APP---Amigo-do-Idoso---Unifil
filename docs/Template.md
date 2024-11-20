@@ -12,13 +12,11 @@ author: Desenvolvido por Unifil
 
 categories: Blog 
 
-tags: "Tecnologia","Sauˊde","AplicativoMobile","Assiste^ncia","Idosos""Tecnologia", "Saúde", "Aplicativo Mobile", "Assistência", "Idosos""Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos" 
+tags: "Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos""Tecnologia", "Saúde", "Aplicativo Mobile", "Assistência", "Idosos""Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos" 
 
-linkandroid: "Link disponível em breve"  
+linkandroid: "https://sites.google.com/view/amigo-do-idoso/download"  
 
-linkios: "Link disponível em breve" 
-
-linksite: https://sites.google.com/view/amigo-do-idoso/ 
+linksite: https://raul-paiva-souza.github.io/Projeto-de-Extensao-APP---Amigo-do-Idoso---Unifil/ 
 
 linkvideo: https://sites.google.com/view/amigo-do-idoso/apresenta%C3%A7%C3%A3o 
 
