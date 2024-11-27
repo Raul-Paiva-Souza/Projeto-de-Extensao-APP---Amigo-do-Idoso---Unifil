@@ -612,13 +612,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 agendaItems.add(agendaItem);
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return agendaItems;
     }
-
-
-
 }
 
