@@ -16,7 +16,7 @@ tags: "Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos""Tecnologi
 
 linkandroid: "https://sites.google.com/view/amigo-do-idoso/download"  
 
-linksite: https://raul-paiva-souza.github.io/Projeto-de-Extensao-APP---Amigo-do-Idoso---Unifil/ 
+linksite: http://amigoidoso.unifil.edu.br/
 
 linkvideo: https://sites.google.com/view/amigo-do-idoso/apresenta%C3%A7%C3%A3o 
 
