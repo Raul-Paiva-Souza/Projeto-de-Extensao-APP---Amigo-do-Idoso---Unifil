@@ -14,11 +14,11 @@ categories: Blog
 
 tags: "Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos""Tecnologia", "Saúde", "Aplicativo Mobile", "Assistência", "Idosos""Tecnologia","Saúde","AplicativoMobile","Assistência","Idosos" 
 
-linkandroid: "https://sites.google.com/view/amigo-do-idoso/download"  
+linkandroid: "https://raul-paiva-souza.github.io/Projeto-de-Extensao-APP---Amigo-do-Idoso---Unifil/download.html"  
 
 linksite: https://Raul-Paiva-Souza.github.io/Projeto-de-Extensao-APP---Amigo-do-Idoso---Unifil/
 
-linkvideo: https://sites.google.com/view/amigo-do-idoso/apresenta%C3%A7%C3%A3o 
+linkvideo: https://raul-paiva-souza.github.io/Projeto-de-Extensao-APP---Amigo-do-Idoso---Unifil/apresentacao.html
 
  
 
