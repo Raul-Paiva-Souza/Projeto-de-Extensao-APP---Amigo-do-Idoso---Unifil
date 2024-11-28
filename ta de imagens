@@ -1,0 +1,297 @@
+[33m5048a3d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Merge remote-tracking branch 'origin/main'
+[33meee35b9[m "CNAME amigoidoso"
+CNAME
+[33m41c8345[m Delete CNAME
+CNAME
+[33mc3098d0[m Update CNAME
+CNAME
+[33m9c66ae4[m "website/root/template-linksite"
+docs/CNAME
+[33m3467b30[m Update CNAME
+CNAME
+[33mb95ad8a[m Update CNAME
+CNAME
+[33m664eb15[m Update CNAME
+CNAME
+[33m2441aec[m Update CNAME
+CNAME
+[33m254ebfb[m Update CNAME
+CNAME
+[33m095fc61[m "website/root"
+Template.md
+[33m814c303[m Merge remote-tracking branch 'origin/main'
+[33m04626e5[m Create CNAME
+CNAME
+[33m32bc1ed[m "website/root"
+Template.md
+apresentacao.html
+diagrama_caso_uso.html
+diagrama_classe.html
+docs/index.html
+download.html
+equipe.html
+index.html
+missao.html
+prototipo_balsamiq.html
+prototipo_ionic.html
+prototipo_mit.html
+style.css
+[33m3b7f125[m Update CNAME
+docs/CNAME
+[33mce73cfd[m Create CNAME
+docs/CNAME
+[33m2c00f21[m "website/docs"
+docs/apresentacao.html
+docs/diagrama_caso_uso.html
+docs/diagrama_classe.html
+docs/download.html
+docs/equipe.html
+docs/index.html
+docs/missao.html
+docs/prototipo_balsamiq.html
+docs/prototipo_ionic.html
+docs/prototipo_mit.html
+docs/style.css
+website/index.html
+[33mb3e3eea[m "website"
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+website/apresentacao.html
+website/diagrama_caso_uso.html
+website/diagrama_classe.html
+website/download.html
+website/equipe.html
+website/index.html
+website/missao.html
+website/prototipo_balsamiq.html
+website/prototipo_ionic.html
+website/prototipo_mit.html
+website/style.css
+[33mfd4a2d6[m "Template atualizado com o link para download"
+docs/Template.md
+[33m6dffba4[m[33m ([m[1;33mtag: v4.0[m[33m)[m "Versão com a correção que ocasionou a geração do executável com sucesso!"
+app/build.gradle.kts
+[33m54d4b27[m "Correções de bugs que surgiram de última hora nas classes relacionadas às consultas e exames"
+.idea/kotlinc.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultaExame.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasExamesActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+[33m5098797[m "Finalmente resolvido o problema com os arquivos build.gradle"
+app/build.gradle.kts
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+build.gradle.kts
+[33mde74bcf[m "Correções para os ícones, nas permissões e na agenda"
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/Agenda.java
+app/src/main/java/com/example/amigo_do_idoso_v31/AlarmReceiver.java
+app/src/main/java/com/example/amigo_do_idoso_v31/MainActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/PermissionHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/SplashActivity.java
+app/src/main/res/drawable-hdpi/splash_image.png
+app/src/main/res/drawable-mdpi/splash_image.png
+app/src/main/res/drawable-xhdpi/splash_image.png
+app/src/main/res/drawable-xxhdpi/splash_image.png
+app/src/main/res/drawable-xxxhdpi/splash_image.png
+app/src/main/res/drawable/splash_image.xml
+app/src/main/res/drawable/splash_screen.xml
+app/src/main/res/layout/activity_splash.xml
+app/src/main/res/mipmap-anydpi-v26/amigo_idoso_icon.png
+app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+app/src/main/res/mipmap-hdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-mdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xhdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xxhdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xxxhdpi/amigo_idoso_icon.png
+[33m3b89a13[m "Implantação de uma classe para gerenciar as permissões necessárias"
+app/src/main/java/com/example/amigo_do_idoso_v31/MainActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/PermissionHelper.java
+[33md73a88b[m "Aprimoramentos e correção da Agenda, com a funcionalidade de alarme implementada com as permissões necessárias, além de permissões para algumas outras funções"
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/Agenda.java
+[33mfb92588[m "Correção do arquivo build.gradle.kts (que estava corrompido)"
+app/build.gradle.kts
+[33m4c13b07[m "Primeira versão operavel (beta)"
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/Agenda.java
+app/src/main/java/com/example/amigo_do_idoso_v31/AgendaAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/AgendaItem.java
+app/src/main/java/com/example/amigo_do_idoso_v31/AlarmReceiver.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasExamesActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasexamesAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/NotificationHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/SOS.java
+app/src/main/res/layout/activity_agenda.xml
+app/src/main/res/layout/activity_consultase_exames.xml
+app/src/main/res/layout/item_agenda.xml
+app/src/main/res/layout/item_consulta_exame.xml
+app/src/main/res/mipmap-anydpi-v26/amigo_idoso_icon.png
+app/src/main/res/mipmap-hdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-mdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-mdpi/ic_launcher.webp
+app/src/main/res/mipmap-mdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xhdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xxhdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xxhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xxxhdpi/amigo_idoso_icon.png
+app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+app/src/main/res/raw/alarm_sound.mp3
+build.gradle.kts
+[33m5b8fa0c[m "Conclusão da tela de medicamentos e início da implementação da tela de consultas e exames"
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultaExame.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasExamesActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Consultasexames.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasexamesAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Menu.java
+app/src/main/res/layout/activity_consultase_exames.xml
+app/src/main/res/layout/dialog_add_consulta_exame.xml
+app/src/main/res/layout/item_consulta_exame.xml
+[33m503842f[m "Implementação da funcionalidade da inserção e exclusão de medicamentos, com interaçao com o banco de dados"
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/MedicamentoAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Medicamentos.java
+app/src/main/res/layout/activity_medicamentos.xml
+site/index.html
+[33mc3cadc4[m Move site para a raiz do repositório
+index.html
+[33m31144fb[m Adiciona pasta site com página inicial
+site/index.html
+[33m6c21ef8[m "Diretório docs para o Github sites³"
+docs/Template.md
+docs/index.html
+[33m8aaf09e[m "Diretório para o Github sites³"
+site/index.html
+[33mb17b984[m "Diretório para o Github sites"
+site/Template.md
+site/amigo_do_idoso_site.html
+[33m275ec9c[m "Diretório para o Github sites"
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+[33m451b6b4[m "Implantação de Pop ups de confirmação nas classes de cadastro e anamnese e correções mostrando a interação com o banco de dados"
+app/src/main/java/com/example/amigo_do_idoso_v31/Anamnese.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Cadastro.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+[33m1bbc32b[m "Correção de bug ao clicar da tela Menu para abrir Consultas/Exames"
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/Agenda.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Anamnese.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Cadastro.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Consultasexames.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Login.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Medicamentos.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Menu.java
+app/src/main/java/com/example/amigo_do_idoso_v31/NovoLogin.java
+app/src/main/java/com/example/amigo_do_idoso_v31/SOS.java
+app/src/main/java/com/example/myapp/utils/PasswordUtils.java
+app/src/main/res/layout/activity_agenda.xml
+app/src/main/res/layout/activity_anamnese.xml
+app/src/main/res/layout/activity_cadastro.xml
+app/src/main/res/layout/activity_consultase_exames.xml
+app/src/main/res/layout/activity_medicamentos.xml
+app/src/main/res/layout/activity_menu.xml
+app/src/main/res/layout/dialog_add_consulta_exame.xml
+app/src/main/res/layout/dialog_add_medicamento.xml
+[33m66e60a4[m "Mudanças para a versão 3.1 do aplicativo (lançamento beta)"
+.idea/misc.xml
+.idea/render.experimental.xml
+app/build.gradle.kts
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/Agenda.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Anamnese.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Cadastro.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Consultasexames.java
+app/src/main/java/com/example/amigo_do_idoso_v31/ConsultasexamesAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/DatabaseHelper.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Login.java
+app/src/main/java/com/example/amigo_do_idoso_v31/MainActivity.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Medicamento.java
+app/src/main/java/com/example/amigo_do_idoso_v31/MedicamentoAdapter.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Medicamentos.java
+app/src/main/java/com/example/amigo_do_idoso_v31/Menu.java
+app/src/main/java/com/example/amigo_do_idoso_v31/NovoLogin.java
+app/src/main/java/com/example/amigo_do_idoso_v31/SOS.java
+app/src/main/java/com/example/amigo_do_idoso_v31/UsuarioIdoso.java
+app/src/main/java/com/example/myapp/utils/PasswordUtils.java
+app/src/main/res/drawable/amigo.png
+app/src/main/res/layout/activity_agenda.xml
+app/src/main/res/layout/activity_anamnese.xml
+app/src/main/res/layout/activity_cadastro.xml
+app/src/main/res/layout/activity_consultase_exames.xml
+app/src/main/res/layout/activity_login.xml
+app/src/main/res/layout/activity_main.xml
+app/src/main/res/layout/activity_medicamentos.xml
+app/src/main/res/layout/activity_menu.xml
+app/src/main/res/layout/activity_novo_login.xml
+app/src/main/res/layout/activity_sos.xml
+app/src/main/res/layout/item_consultasexames.xml
+app/src/main/res/layout/item_medicamento.xml
+app/src/main/res/values/strings.xml
+[33m27c8a03[m "Agora a build vai (mesmo)"
+.github/workflows/ci-cd.yml
+[33m88bedbb[m "Agora a build vai"
+.github/workflows/ci-cd.yml
+.idea/misc.xml
+build.gradle.kts
+gradle.properties
+[33m933c116[m Mais algumas atualizações no gradle
+package-lock.json
+package.json
+[33m761cc6d[m Adiciona novo arquivo e atualiza workflow
+.github/workflows/ci-cd.yml
+package-lock.json
+package.json
+[33m2f5d15b[m Adiciona novo arquivo
+.github/workflows/ci-cd.yml
+.gitignore
+.idea/.gitignore
+.idea/.name
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/vcs.xml
+Start-Service ssh-agent
+Start-Service ssh-agent.pub
+app/.gitignore
+app/build.gradle.kts
+app/proguard-rules.pro
+app/src/androidTest/java/com/example/amigo_do_idoso_v31/ExampleInstrumentedTest.java
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/amigo_do_idoso_v31/MainActivity.java
+app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+app/src/main/res/drawable/amigo_do_idoso_imagem_tela_inicial.png
+app/src/main/res/drawable/ic_launcher_background.xml
+app/src/main/res/layout/activity_main.xml
+app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+app/src/main/res/mipmap-hdpi/ic_launcher.webp
+app/src/main/res/mipmap-hdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-mdpi/ic_launcher.webp
+app/src/main/res/mipmap-mdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xxhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp
+app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+app/src/main/res/values-night/themes.xml
+app/src/main/res/values/colors.xml
+app/src/main/res/values/strings.xml
+app/src/main/res/values/themes.xml
+app/src/main/res/xml/backup_rules.xml
+app/src/main/res/xml/data_extraction_rules.xml
+app/src/test/java/com/example/amigo_do_idoso_v31/ExampleUnitTest.java
+build.gradle.kts
+gradle.properties
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+settings.gradle.kts
+[33m837180e[m first commit
+README.md
