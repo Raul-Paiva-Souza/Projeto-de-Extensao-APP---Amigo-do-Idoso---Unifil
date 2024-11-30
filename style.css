@@ -13,7 +13,7 @@ section {
     background-position: center;
     padding: 20px;
     border-radius: 10px;
-    color: #fff; /* Ajuste a cor do texto conforme necessário para boa legibilidade */
+    color: #000000; /* Ajuste a cor do texto conforme necessário para boa legibilidade */
 }
 
 header {
@@ -116,8 +116,8 @@ h1 {
 }
 
 .team-member img {
-    width: 100px;  /* Ajuste conforme necessário */
-    height: 100px; /* Ajuste conforme necessário */
+    width: 100px;  /
+    height: 100px; /
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -172,7 +172,7 @@ footer {
 .column img {
     width: 100%;
     height: auto;
-    max-height: 300px; /* Ajuste conforme necessário */
+    max-height: 300px;
     margin-top: 10px;
 }
 
