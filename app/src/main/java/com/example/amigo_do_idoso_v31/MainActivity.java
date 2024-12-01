@@ -21,20 +21,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // Certifique-se de que activity_main.xml está correto
 
         // Solicitar permissões
         if (!PermissionHelper.checkAndRequestPermissions(this)) {
             Toast.makeText(this, "Por favor, conceda todas as permissões para usar o aplicativo.", Toast.LENGTH_LONG).show();
         }
 
-        // Solicitar permissão de notificação se necessário
+        // Solicitar permissão de notificação (Android 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13 (API 33)
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
             }
         }
 
+        // Verificar permissão para alarmes exatos (Android 12+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             if (!alarmManager.canScheduleExactAlarms()) {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Forçar a criação do banco de dados
+        // Inicializar banco de dados
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
